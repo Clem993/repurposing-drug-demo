@@ -1002,7 +1002,7 @@ def page_analysis():
             with data_cols[1]:
                 st.metric("Target", "OX2R")
             with data_cols[2]:
-                st.metric("Modality", "Small Molecule")
+                st.metric("Modality", "Small Mol")
             with data_cols[3]:
                 st.metric("Data Files", "4 files")
         

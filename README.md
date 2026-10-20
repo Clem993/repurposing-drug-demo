@@ -1,118 +1,80 @@
-# Excelra Indication Expansion & Drug Repurposing Demo
+# Indication Expansion & Drug Repurposing Demo
 
-Interactive sales demonstration tool showcasing the GRIP-powered drug repurposing workflow.
+An interactive Streamlit demonstration of a drug repurposing workflow, from asset configuration to a prioritised indication shortlist. The application uses fictional compounds and a small, embedded dataset to illustrate how different evidence categories can be brought together for review.
 
-## Overview
+## Demonstration scope
 
-This Streamlit application demonstrates Excelra's Indication Expansion and Drug Repurposing service capabilities through an interactive workflow simulation. It showcases how GRIP (Global Repository of Integrated Phenotypes) technology identifies new therapeutic applications for shelved pharmaceutical assets.
+The starting scenario is a fictional shelved development asset. Users can select a demonstration compound, configure the workflow, move through six analysis stages and explore the results.
 
-### Demo Case
-**Shelved Phase II Asset** - A Japanese large pharma compound (EXC-7842/Somnolexin) that failed Phase II trials for sleep disorders. The demo shows how multi-omics data can be leveraged to identify alternative indications and recover R&D investment.
+All compound profiles, evidence flags, scores and rationales are illustrative. The application does not query live databases, process uploaded research data or generate validated therapeutic predictions. The rankings support a demonstration of the interface and workflow; they are not clinical recommendations.
 
 ## Features
 
-- **Overview Page**: Introduction to the demo case and workflow preview
-- **Asset Configuration**: Interactive compound and analysis parameter selection
-- **GRIP Analysis**: Step-by-step workflow progression through 6 analysis stages
-- **Results Dashboard**: Tiered indication ranking, evidence heatmap, Sankey diagram, and deep-dive analysis
+| Page | Function |
+| --- | --- |
+| Overview | Introduces the fictional case and previews the workflow. |
+| Asset Configuration | Selects a demonstration compound and analysis settings. |
+| Analysis | Steps through data ingestion, evidence review, association mapping, scoring, omics review and prioritisation. |
+| Results Dashboard | Displays tiered indication rankings, an evidence heatmap, a Sankey diagram, tier distribution and an indication deep dive. |
 
-## Deploying to Streamlit Cloud
+The interface uses a neutral colour palette, system fonts and icons defined in the application. No separate image assets are required.
 
-### Step 1: Create GitHub Repository
+All three compound choices share the same ten-row evidence matrix. Configuration filters determine the displayed shortlist. CSV and JSON downloads include the configured results with explicit synthetic-data labels.
 
-1. Go to [GitHub](https://github.com) and sign in
-2. Click **New repository** (green button)
-3. Name it (e.g., `excelra-repurposing-demo`)
-4. Set to **Private** (recommended for internal tools)
-5. Click **Create repository**
+## Run locally
 
-### Step 2: Upload Files
-
-Upload all files from this package to your repository. You can either:
-
-**Option A: Upload via GitHub web interface**
-1. Click "uploading an existing file" on the empty repo page
-2. Drag and drop all files
-3. Click "Commit changes"
-
-**Option B: Use Git command line**
-```bash
-git clone https://github.com/YOUR_USERNAME/excelra-repurposing-demo.git
-cd excelra-repurposing-demo
-# Copy all files from this package into the folder
-git add .
-git commit -m "Initial commit"
-git push origin main
-```
-
-### Step 3: Deploy on Streamlit Cloud
-
-1. Go to [share.streamlit.io](https://share.streamlit.io)
-2. Sign in with your GitHub account
-3. Click **New app**
-4. Select:
-   - Repository: `YOUR_USERNAME/excelra-repurposing-demo`
-   - Branch: `main`
-   - Main file path: `app.py`
-5. Click **Deploy**
-
-Your app will be live at: `https://YOUR-APP-NAME.streamlit.app`
-
-### Step 4: Share with Colleagues
-
-For private repositories:
-1. Go to your GitHub repo → Settings → Collaborators
-2. Add colleagues by their GitHub username
-3. Share the Streamlit Cloud URL
-
-## Required Files
-
-```
-excelra-repurposing-demo/
-├── app.py                 # Main application
-├── requirements.txt       # Dependencies
-├── README.md             # This file
-├── .gitignore            # Git ignore rules
-├── .streamlit/
-│   └── config.toml       # Theme configuration
-└── assets/               # All PNG icons (see list below)
-```
-
-### Required Assets (PNG files)
-
-Copy all these from your existing assets folder:
-- Logo.png, Slogan.png, Wave.png
-- repurpose.png, repurpose2.png, Start.png
-- Input.png, Analysis.png, ranking.png, Home.png
-- Novel.png, Clinical.png, adverse.png, books.png
-- flow.png, metabolomic.png, Network.png
-- Data acquisition.png, deep_dive.png, heatmap.png
-- Bar_chart.png, Pie_chart.png, Gene.png
-- total.png, tier1.png, tier2.png, lipidomimc.png
-
-## Local Development
+Use Python 3.12 and install the dependencies in a virtual environment:
 
 ```bash
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run locally
-streamlit run app.py
+git clone https://github.com/Clem993/repurposing-drug-demo.git
+cd repurposing-drug-demo
+python -m venv .venv
 ```
 
-## Brand Colours
+Activate the environment on macOS or Linux:
 
-| Colour | Hex | Usage |
-|--------|-----|-------|
-| Deep Blue | #0A1E4A | Primary text |
-| Violet | #A24DBE | Accents, Tier II |
-| Magenta | #E04F8A | Primary accent, Tier I |
-| Soft Lavender | #E3D9F2 | Backgrounds |
+```bash
+source .venv/bin/activate
+```
 
----
+On Windows PowerShell:
 
-**© 2024 Excelra** | Where data means more
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+Then install and start the application:
+
+```bash
+python -m pip install -r requirements.txt
+python -m streamlit run app.py
+```
+
+No API keys or external database credentials are required.
+
+## Deploy on Streamlit Community Cloud
+
+Open [Streamlit Community Cloud](https://share.streamlit.io/), create an app and select the following GitHub settings:
+
+| Setting | Value |
+| --- | --- |
+| Repository | `Clem993/repurposing-drug-demo` |
+| Branch | `main` |
+| Entrypoint file | `app.py` |
+| Python version | `3.12` |
+
+If you fork the repository, use your fork's owner and repository name. Review the app's sharing settings before distributing its URL. See the [official deployment guide](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy) for the current deployment steps.
+
+## Repository files
+
+| File | Purpose |
+| --- | --- |
+| `app.py` | Application, fictional sample data, charts and inline icons. |
+| `requirements.txt` | Python dependencies. |
+| `.streamlit/config.toml` | Neutral interface theme. |
+| `.gitignore` | Excludes local environments, caches and secrets from commits. |
+| `README.md` | Scope, setup and deployment instructions. |
+
+## Working with the example data
+
+The sample data is defined in `app.py`. Keep the fictional-data labelling visible when adapting the demonstration. Any connection to real data sources, scientific validation or production access controls requires separate implementation.
